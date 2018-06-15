@@ -2,7 +2,7 @@ package com.osp.demo.movietheater.controller.mapper;
 
 import com.osp.demo.movietheater.DummyMock;
 import com.osp.demo.movietheater.domain.Movie;
-import com.osp.demo.movietheater.dto.MovieDTO;
+import com.osp.demo.movietheater.controller.dto.MovieDTO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;

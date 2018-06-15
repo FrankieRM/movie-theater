@@ -1,7 +1,7 @@
 package com.osp.demo.movietheater.controller.mapper;
 
 import com.osp.demo.movietheater.domain.Movie;
-import com.osp.demo.movietheater.dto.MovieDTO;
+import com.osp.demo.movietheater.controller.dto.MovieDTO;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

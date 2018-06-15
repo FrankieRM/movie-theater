@@ -1,4 +1,4 @@
-package com.osp.demo.movietheater.dto;
+package com.osp.demo.movietheater.controller.dto;
 
 public class MovieDTO {
 

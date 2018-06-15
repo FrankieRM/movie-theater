@@ -4,7 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.osp.demo.movietheater.domain.Movie;
 import com.osp.demo.movietheater.domain.MovieStatus;
-import com.osp.demo.movietheater.dto.MovieDTO;
+import com.osp.demo.movietheater.controller.dto.MovieDTO;
 
 import java.time.LocalDateTime;
 import java.util.Collections;

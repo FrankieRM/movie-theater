@@ -2,7 +2,7 @@ package com.osp.demo.movietheater.controller;
 
 import com.osp.demo.movietheater.business.MovieService;
 import com.osp.demo.movietheater.controller.mapper.MovieMapper;
-import com.osp.demo.movietheater.dto.MovieDTO;
+import com.osp.demo.movietheater.controller.dto.MovieDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-public class MovieResource {
+public class MovieController {
 
-    private final Logger LOGGER = LoggerFactory.getLogger(MovieResource.class);
+    private final Logger LOGGER = LoggerFactory.getLogger(MovieController.class);
 
     @Autowired
     private MovieService movieService;
