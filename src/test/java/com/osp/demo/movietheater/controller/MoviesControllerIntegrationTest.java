@@ -18,8 +18,8 @@ package com.osp.demo.movietheater.controller;
 
 import com.osp.demo.movietheater.DummyMock;
 import com.osp.demo.movietheater.business.MovieService;
-import org.junit.Before;
 import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.runner.RunWith;
 import org.mockito.BDDMockito;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,7 +48,7 @@ public class MoviesControllerIntegrationTest {
     @MockBean
     private MovieService movieService;
 
-    @Before
+    @BeforeAll
     public void setUp() throws Exception {
         this.mvc.perform(MockMvcRequestBuilders.post("/movies")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -56,7 +56,18 @@ public class MoviesControllerIntegrationTest {
     }
 
     @Test
-    public void getMoviesWhenResponseExistsTest() throws Exception {
+    public void getMoviesWhenResponseListTest() throws Exception {
+        BDDMockito.given(this.movieService.getMovies())
+                .willReturn(DummyMock.getMoviesCollection());
+
+        this.mvc.perform(MockMvcRequestBuilders.get("/movies")
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(content().string(DummyMock.getMovieDTOCollectionAsString()));
+    }
+
+    @Test
+    public void getMovieWhenResponseExistsTest() throws Exception {
         BDDMockito.given(this.movieService.getMovie(DummyMock.MOVIE_ID_VALUE))
                 .willReturn(DummyMock.getMovie());
 
@@ -67,12 +78,58 @@ public class MoviesControllerIntegrationTest {
     }
 
     @Test
-    public void getMoviesWhenResponseNotExistsTest() throws Exception {
+    public void getMovieWhenResponseNotExistsTest() throws Exception {
         BDDMockito.given(this.movieService.getMovie(DummyMock.MOVIE_ID_VALUE))
                 .willReturn(DummyMock.getMovie());
 
         this.mvc.perform(MockMvcRequestBuilders
                 .get("/movies/2")
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(content().string(EMPTY));
+    }
+
+    @Test
+    public void createMovieTest() throws Exception {
+        BDDMockito.given(this.movieService.saveMovie(DummyMock.getMovie()))
+                .willReturn(DummyMock.getMovie());
+
+        BDDMockito.given(this.movieService.getMovie(DummyMock.MOVIE_ID_VALUE))
+                .willReturn(DummyMock.getMovie());
+
+        this.mvc.perform(MockMvcRequestBuilders.post("/movies")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(DummyMock.getMovieDTOAsString()));
+
+        this.mvc.perform(MockMvcRequestBuilders
+                .get("/movies/1")
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(content().string(DummyMock.getMovieDTOAsString()));
+    }
+
+    @Test
+    public void updateMovieTest() throws Exception {
+        BDDMockito.given(this.movieService.saveMovie(DummyMock.getMovie()))
+                .willReturn(DummyMock.getMovie());
+
+        BDDMockito.given(this.movieService.getMovie(DummyMock.MOVIE_ID_VALUE))
+                .willReturn(DummyMock.getMovie());
+
+        this.mvc.perform(MockMvcRequestBuilders.put("/movies")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(DummyMock.getMovieDTOAsString()));
+
+        this.mvc.perform(MockMvcRequestBuilders
+                .get("/movies/1")
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(content().string(DummyMock.getMovieDTOAsString()));
+    }
+
+    @Test
+    public void deleteMovieTest() throws Exception {
+        this.mvc.perform(MockMvcRequestBuilders.delete("/movies/1")
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(content().string(EMPTY));

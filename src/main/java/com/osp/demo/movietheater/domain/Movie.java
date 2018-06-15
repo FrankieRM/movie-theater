@@ -45,14 +45,4 @@ public class Movie {
     public void setStatus(String status) {
         this.status = status;
     }
-
-    @Override
-    public String toString() {
-        return "Movie{" +
-                "id=" + id +
-                ", fullName='" + fullName + '\'' +
-                ", publishingDate='" + publishingDate + '\'' +
-                ", status='" + status + '\'' +
-                '}';
-    }
 }

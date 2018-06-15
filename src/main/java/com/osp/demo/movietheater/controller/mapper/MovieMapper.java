@@ -30,9 +30,6 @@ public class MovieMapper {
     }
 
     public Movie mapMovie(final MovieDTO movieDTO) {
-        if (movieDTO == null) {
-            return null;
-        }
         return modelMapper.map(movieDTO, Movie.class);
     }
 }

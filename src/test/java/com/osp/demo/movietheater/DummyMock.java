@@ -42,7 +42,15 @@ public final class DummyMock {
         return movieDTO;
     }
 
+    public static List<MovieDTO> getMoviesDTOCollection() {
+        return Collections.singletonList(getMovieDTO());
+    }
+
     public static String getMovieDTOAsString() throws JsonProcessingException {
         return new ObjectMapper().writeValueAsString(DummyMock.getMovieDTO());
+    }
+
+    public static String getMovieDTOCollectionAsString() throws JsonProcessingException {
+        return new ObjectMapper().writeValueAsString(DummyMock.getMoviesDTOCollection());
     }
 }
