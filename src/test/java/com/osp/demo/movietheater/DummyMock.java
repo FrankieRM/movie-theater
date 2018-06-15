@@ -1,5 +1,7 @@
 package com.osp.demo.movietheater;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.osp.demo.movietheater.domain.Movie;
 import com.osp.demo.movietheater.domain.MovieStatus;
 import com.osp.demo.movietheater.dto.MovieDTO;
@@ -38,5 +40,9 @@ public final class DummyMock {
         movieDTO.setPublishingDate(DummyMock.MOVIE_PUBLISHING_DATE_VALUE);
         movieDTO.setStatus(MovieStatus.ACTIVE.toString());
         return movieDTO;
+    }
+
+    public static String getMovieDTOAsString() throws JsonProcessingException {
+        return new ObjectMapper().writeValueAsString(DummyMock.getMovieDTO());
     }
 }
